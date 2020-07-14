@@ -38,10 +38,10 @@ body {
   }   
   50% {     
     opacity: 1;
-    width: 200%;
-    transform: rotate(-20deg);
+    width: 150%;
+    transform: rotate(-40deg);
     top: -800px;
-    left: -500px;
+    left: -300px;
   } 
   100% {
     opacity: 0;
@@ -51,6 +51,23 @@ body {
     left: -500px;
    }
 }
+
+@keyframes dots-anim {   
+  0% {     
+    opacity: 0;   
+  }   
+  50% {     
+    opacity: 0.2;
+  }
+  100% {
+    opacity: 0;
+    width: 105%;
+    transform: rotate(10deg);
+    top: -50px;
+    left: -100px;
+   }
+}
+
 
 @keyframes dark-anim {   
   0% {     
@@ -74,13 +91,29 @@ body {
   transition: all;
 }
 
-.smoke img {
+.dots {
+  opacity: 0;   
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  left: 0;
+  top: 0;
+  transition: all;
+}
+
+
+.smoke img,
+.dots img  {
   width: 100%;
   object-fit: cover;
 }
 
 .animation-smoke {
   animation: smoke-anim 4s ease 1;
+}
+
+.animation-dots {
+  animation: dots-anim 1s linear 1;
 }
 
 .dark-anim {

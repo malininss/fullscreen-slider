@@ -1,21 +1,18 @@
 let topPx = window.pageYOffset;
 let canScroll = true;
-const sectionHeight = document.querySelector('section').clientHeight;
-const bodyHeight = document.querySelector('body').clientHeight;
+let sectionHeight = document.querySelector('section').clientHeight;
+let bodyHeight = document.querySelector('body').clientHeight;
 const smoke = document.querySelector('.smoke');
+const dots = document.querySelector('.dots');
 const darkBg = document.querySelector('.dark-bg');
-
 
 const scrollFn = (event) => {
   
   if (canScroll === false) {
-    console.log('Пока нельзя скроллить!');
     return;
   } else if (event.deltaY < 0 && window.pageYOffset === 0) {
-    console.log('Больше нельзя скроллить вверх');
     return
   } else if (event.deltaY > 0 && window.pageYOffset + window.innerHeight + event.deltaY > bodyHeight) {
-    console.log('Больше нельзя скроллить вниз');
     return
   }
 
@@ -23,10 +20,11 @@ const scrollFn = (event) => {
 
   let promise = new Promise((resolve, reject) => {
     smoke.classList.add('animation-smoke');
+    dots.classList.add('animation-dots');
     darkBg.classList.add('dark-anim');
     setTimeout(() => {
       resolve();
-    }, 2000);
+    }, 1800);
   });
   
   promise.then(
@@ -50,6 +48,7 @@ const scrollFn = (event) => {
       setTimeout(() => {
         canScroll = true;
         smoke.classList.remove('animation-smoke');
+        dots.classList.remove('animation-dots');
         darkBg.classList.remove('dark-anim');
       }, 2000);
 
@@ -63,3 +62,15 @@ const scrollFn = (event) => {
 window.addEventListener('wheel', (event) => {
   scrollFn(event);
 });
+
+
+window.addEventListener('resize', () => {
+  window.scrollTo({
+    top: topPx
+  });
+  
+  topPx = 0;
+  sectionHeight = document.querySelector('section').clientHeight;
+  bodyHeight = document.querySelector('body').clientHeight;
+  
+})
